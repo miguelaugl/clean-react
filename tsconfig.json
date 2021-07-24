@@ -11,10 +11,6 @@
     "moduleResolution": "node",
     "jsx": "preserve",
     "rootDir": "src",
-    "baseUrl": "src",
-    "paths": {
-      "@/*": ["*"]
-    },
     "allowJs": true,
     "resolveJsonModule": true,
   },
