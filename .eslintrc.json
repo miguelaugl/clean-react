@@ -25,7 +25,19 @@
     "eslint-plugin-unused-imports"
 	],
 	"rules": {
+    "prettier/prettier": "error",
 		"unused-imports/no-unused-imports": "error",
-		"react-hooks/exhaustive-deps": "warn"
-	}
+		"import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
+      }
+    ]
+	},
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
 }
