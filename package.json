@@ -6,6 +6,7 @@
   "author": "Miguel <miguelaugl@outlook.com>",
   "license": "MIT",
   "scripts": {
+    "prepare": "husky install",
     "test": "jest"
   },
   "devDependencies": {
