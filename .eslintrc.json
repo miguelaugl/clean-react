@@ -25,6 +25,11 @@
     "eslint-plugin-unused-imports"
 	],
 	"rules": {
+    "class-methods-use-this": "off",
+    "max-classes-per-file": "off",
+    "no-empty-function": "off",
+    "import/prefer-default-export": "off",
+    "no-useless-constructor": "off",
     "prettier/prettier": "error",
 		"unused-imports/no-unused-imports": "error",
 		"import/extensions": [
