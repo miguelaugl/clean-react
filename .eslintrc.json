@@ -6,6 +6,7 @@
 	},
 	"extends": [
 		"plugin:react/recommended",
+		"plugin:prettier/recommended",
 		"airbnb"
 	],
 	"parser": "@typescript-eslint/parser",
@@ -18,8 +19,13 @@
 	},
 	"plugins": [
 		"react",
-		"@typescript-eslint"
+		"@typescript-eslint",
+		"prettier",
+    "eslint-plugin-import-helpers",
+    "eslint-plugin-unused-imports"
 	],
 	"rules": {
+		"unused-imports/no-unused-imports": "error",
+		"react-hooks/exhaustive-deps": "warn"
 	}
 }
