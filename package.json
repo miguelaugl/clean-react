@@ -6,7 +6,7 @@
   "author": "Miguel <miguelaugl@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack serve --open",
     "prepare": "husky install",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
