@@ -32,7 +32,12 @@
     "lines-between-class-members": "off",
     "no-useless-constructor": "off",
     "no-shadow": "off",
+    "no-use-before-define": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-filename-extension": "off",
     "import/no-extraneous-dependencies": "off",
+    "react/destructuring-assignment": "off",
+    "jsx-quotes": ["error", "prefer-single"],
     "prettier/prettier": "error",
 		"unused-imports/no-unused-imports": "error",
 		"import/extensions": [
