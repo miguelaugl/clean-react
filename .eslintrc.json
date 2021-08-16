@@ -44,9 +44,11 @@
       "error",
       "ignorePackages",
       {
-        "ts": "never"
+        "ts": "never",
+        "tsx": "never"
       }
-    ]
+    ],
+    "object-curly-newline": "off"
 	},
   "settings": {
     "import/resolver": {

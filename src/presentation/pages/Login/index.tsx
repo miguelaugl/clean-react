@@ -1,7 +1,5 @@
 import React from 'react';
-import { LoginHeader } from '@/presentation/components/LoginHeader';
-import { Input } from '@/presentation/components/Input';
-import { FormStatus } from '@/presentation/components/FormStatus';
+import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components';
 import styles from './styles.scss';
 
 export const Login = () => (
@@ -22,5 +20,7 @@ export const Login = () => (
 
       <FormStatus label='Erro' />
     </form>
+
+    <Footer />
   </div>
 );
