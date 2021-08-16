@@ -33,7 +33,9 @@ button {
   line-height: 42px;
   transition: opacity .4s;
 
-  &:hover {
-    opacity: 0.9;
+  &:not(:disabled) {
+    &:hover {
+      opacity: 0.9;
+    }
   }
 }

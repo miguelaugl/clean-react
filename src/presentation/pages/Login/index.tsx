@@ -25,7 +25,7 @@ export const Login = () => {
           <Input type='email' name='email' placeholder='Digite seu e-mail' />
           <Input type='password' name='password' placeholder='Digite sua senha' />
 
-          <button className={styles.submit} type='submit'>
+          <button data-testid='submit-btn' disabled className={styles.submit} type='submit'>
             Entrar
           </button>
 
