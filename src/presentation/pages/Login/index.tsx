@@ -1,14 +1,11 @@
 import React from 'react';
 import { Spinner } from '@/presentation/components/Spinner';
-import { Logo } from '@/presentation/components/Logo';
+import { LoginHeader } from '@/presentation/components/LoginHeader';
 import styles from './styles.scss';
 
 export const Login = () => (
   <div className={styles.login}>
-    <header className={styles.header}>
-      <Logo />
-      <h1>4DEV - Enquetes para Programadores</h1>
-    </header>
+    <LoginHeader />
     <form className={styles.form}>
       <h2>Login</h2>
       <div className={styles.inputWrap}>
@@ -28,6 +25,5 @@ export const Login = () => (
         <span className={styles.error}>Erro</span>
       </div>
     </form>
-    <footer className={styles.footer} />
   </div>
 );
