@@ -48,7 +48,8 @@
         "tsx": "never"
       }
     ],
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-param-reassign": "off"
 	},
   "settings": {
     "import/resolver": {
