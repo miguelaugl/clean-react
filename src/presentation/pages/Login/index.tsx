@@ -1,26 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components';
+import { FormContextProvider } from '@/presentation/contexts/form';
 import styles from './styles.scss';
 
-export const Login = () => (
-  <div className={styles.login}>
-    <LoginHeader />
+type StateProps = {
+  isLoading: boolean;
+  errorMessage: string;
+};
 
-    <form className={styles.form}>
-      <h2>Login</h2>
+export const Login = () => {
+  const [state] = useState<StateProps>({
+    isLoading: false,
+    errorMessage: '',
+  });
 
-      <Input type='email' name='email' placeholder='Digite seu e-mail' />
-      <Input type='password' name='password' placeholder='Digite sua senha' />
+  return (
+    <div className={styles.login}>
+      <LoginHeader />
 
-      <button className={styles.submit} type='submit'>
-        Entrar
-      </button>
+      <FormContextProvider value={state}>
+        <form className={styles.form}>
+          <h2>Login</h2>
 
-      <span className={styles.link}>Criar conta</span>
+          <Input type='email' name='email' placeholder='Digite seu e-mail' />
+          <Input type='password' name='password' placeholder='Digite sua senha' />
 
-      <FormStatus label='Erro' />
-    </form>
+          <button className={styles.submit} type='submit'>
+            Entrar
+          </button>
 
-    <Footer />
-  </div>
-);
+          <span className={styles.link}>Criar conta</span>
+
+          <FormStatus label='Erro' />
+        </form>
+      </FormContextProvider>
+
+      <Footer />
+    </div>
+  );
+};
