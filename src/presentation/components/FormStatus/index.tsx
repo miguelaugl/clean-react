@@ -8,12 +8,12 @@ type Props = {
 };
 
 export const FormStatus = ({ label }: Props) => {
-  const { state, errorState } = useForm();
+  const { state } = useForm();
 
   return (
     <div data-testid='error-wrap' className={styles.errorWrap}>
       {state.isLoading && <Spinner className={styles.spinner} />}
-      {errorState.main && <span className={styles.error}>{label}</span>}
+      {state.main && <span className={styles.error}>{label}</span>}
     </div>
   );
 };
