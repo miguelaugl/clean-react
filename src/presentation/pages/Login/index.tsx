@@ -18,6 +18,14 @@ export const Login = ({ validation }: Props) => {
     mainError: '',
   });
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    setState({
+      ...state,
+      isLoading: true,
+    });
+  };
+
   useEffect(() => {
     setState({
       ...state,
@@ -31,7 +39,7 @@ export const Login = ({ validation }: Props) => {
       <LoginHeader />
 
       <FormContextProvider value={{ state, setState }}>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <h2>Login</h2>
 
           <Input type='email' name='email' placeholder='Digite seu e-mail' />
