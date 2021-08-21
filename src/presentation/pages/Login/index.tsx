@@ -3,6 +3,7 @@ import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/component
 import { FormContextProvider } from '@/presentation/contexts/form';
 import { Validation } from '@/presentation/protocols/validation';
 import { Authentication } from '@/domain/usecases';
+import { Link } from 'react-router-dom';
 import styles from './styles.scss';
 
 type Props = {
@@ -68,7 +69,9 @@ export const Login = ({ validation, authentication }: Props) => {
             Entrar
           </button>
 
-          <span className={styles.link}>Criar conta</span>
+          <Link to='/signup' data-testid='signup' className={styles.link}>
+            Criar conta
+          </Link>
 
           <FormStatus />
         </form>
