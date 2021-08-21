@@ -63,7 +63,7 @@ export const Login = ({ validation, authentication }: Props) => {
           <Input type='password' name='password' placeholder='Digite sua senha' />
 
           <button
-            data-testid='submit-btn'
+            data-testid='submit'
             disabled={!!state.emailError || !!state.passwordError}
             className={styles.submit}
             type='submit'
