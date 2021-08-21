@@ -6,7 +6,7 @@ type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>
 
 export const Input = (props: Props) => {
   const { state, setState } = useForm();
-  const errorTitle = state[`${props.name}Error`];
+  const error = state[`${props.name}Error`];
 
   const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     event.target.readOnly = false;
@@ -19,9 +19,9 @@ export const Input = (props: Props) => {
     });
   };
 
-  const getStatus = (): string => '🔴';
+  const getStatus = (): string => (error ? '🔴' : '🟢');
 
-  const getTitle = (): string => errorTitle;
+  const getTitle = (): string => error || 'Tudo certo';
 
   return (
     <div className={styles.inputWrap}>
