@@ -23,12 +23,20 @@ export const Login = ({ validation, authentication }: Props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
-    if (state.isLoading || state.emailError || state.passwordError) {
-      return;
-    }
+    try {
+      if (state.isLoading || state.emailError || state.passwordError) {
+        return;
+      }
 
-    setState({ ...state, isLoading: true });
-    await authentication.auth({ email: state.email, password: state.password });
+      setState({ ...state, isLoading: true });
+      await authentication.auth({ email: state.email, password: state.password });
+    } catch (error) {
+      setState({
+        ...state,
+        isLoading: false,
+        mainError: error.message,
+      });
+    }
   };
 
   useEffect(() => {
@@ -61,7 +69,7 @@ export const Login = ({ validation, authentication }: Props) => {
 
           <span className={styles.link}>Criar conta</span>
 
-          <FormStatus label='Erro' />
+          <FormStatus />
         </form>
       </FormContextProvider>
 

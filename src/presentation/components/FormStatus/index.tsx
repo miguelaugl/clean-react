@@ -3,17 +3,18 @@ import { Spinner } from '@/presentation/components/Spinner';
 import { useForm } from '@/presentation/contexts/form';
 import styles from './styles.scss';
 
-type Props = {
-  label: string;
-};
-
-export const FormStatus = ({ label }: Props) => {
+export const FormStatus = () => {
   const { state } = useForm();
+  const { isLoading, mainError } = state;
 
   return (
     <div data-testid='error-wrap' className={styles.errorWrap}>
-      {state.isLoading && <Spinner className={styles.spinner} />}
-      {state.main && <span className={styles.error}>{label}</span>}
+      {isLoading && <Spinner className={styles.spinner} />}
+      {mainError && (
+        <span data-testid='main-error' className={styles.error}>
+          {mainError}
+        </span>
+      )}
     </div>
   );
 };
