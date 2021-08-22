@@ -51,7 +51,8 @@
     "object-curly-newline": "off",
     "no-param-reassign": "off",
     "arrow-body-style": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "implicit-arrow-linebreak": "off"
 	},
   "settings": {
     "import/resolver": {
