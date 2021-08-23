@@ -8,7 +8,7 @@ export const useForm = () => {
   const ctx = useContext(FormContext);
 
   if (!ctx) {
-    throw new Error('FormContext not found.');
+    return new Error('FormContext not found.');
   }
 
   return ctx;
