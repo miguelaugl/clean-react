@@ -1,5 +1,7 @@
-import { useForm } from '@/presentation/contexts/form';
 import React from 'react';
+
+import { useForm } from '@/presentation/contexts/form';
+
 import styles from './styles.scss';
 
 type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;

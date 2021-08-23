@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
+
 import { Logo } from '@/presentation/components/Logo';
+
 import styles from './styles.scss';
 
 const LoginHeaderComponent = () => (

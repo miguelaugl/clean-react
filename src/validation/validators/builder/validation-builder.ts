@@ -1,5 +1,6 @@
 import { FieldValidation } from '@/validation/protocols/field-validation';
 import { RequiredFieldValidation } from '@/validation/validators/required-field/required-field-validation';
+
 import { EmailValidation } from '../email/email-validation';
 import { MinLengthValidation } from '../min-length/min-length-validation';
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+
+import { Authentication } from '@/domain/usecases';
 import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components';
 import { FormContextProvider } from '@/presentation/contexts/form';
 import { Validation } from '@/presentation/protocols/validation';
-import { Authentication } from '@/domain/usecases';
-import { Link, useHistory } from 'react-router-dom';
+
 import styles from './styles.scss';
 
 type Props = {

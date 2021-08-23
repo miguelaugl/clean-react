@@ -8,6 +8,7 @@
   "scripts": {
     "start": "webpack serve --open",
     "prepare": "husky install",
+    "lint": "eslint 'src/**'",
     "test": "jest --passWithNoTests --no-cache --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:staged": "yarn test -- --findRelatedTests",
