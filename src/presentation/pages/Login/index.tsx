@@ -74,7 +74,7 @@ export const Login = ({ validation, authentication, saveAccessToken }: Props) =>
             Entrar
           </button>
 
-          <Link to='/signup' data-testid='signup' className={styles.link}>
+          <Link to='/signup' data-testid='signup-link' className={styles.link}>
             Criar conta
           </Link>
 
