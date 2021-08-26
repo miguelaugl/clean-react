@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { Authentication, SaveAccessToken } from '@/domain/usecases';
-import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components';
+import { LoginHeader, Footer, FormStatus, Input, SubmitButton } from '@/presentation/components';
 import { FormContextProvider } from '@/presentation/contexts/form';
 import { Validation } from '@/presentation/protocols/validation';
 
@@ -18,6 +18,7 @@ export const Login = ({ validation, authentication, saveAccessToken }: Props) =>
   const history = useHistory();
   const [state, setState] = useState({
     isLoading: false,
+    isFormInvalid: true,
     email: '',
     password: '',
     emailError: '',
@@ -29,7 +30,7 @@ export const Login = ({ validation, authentication, saveAccessToken }: Props) =>
     event.preventDefault();
 
     try {
-      if (state.isLoading || state.emailError || state.passwordError) {
+      if (state.isLoading || state.isFormInvalid) {
         return;
       }
 
@@ -47,10 +48,14 @@ export const Login = ({ validation, authentication, saveAccessToken }: Props) =>
   };
 
   useEffect(() => {
+    const emailError = validation.validate('email', state.email);
+    const passwordError = validation.validate('password', state.password);
+
     setState({
       ...state,
-      emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('password', state.password),
+      emailError,
+      passwordError,
+      isFormInvalid: !!emailError || !!passwordError,
     });
   }, [state.email, state.password]);
 
@@ -65,14 +70,7 @@ export const Login = ({ validation, authentication, saveAccessToken }: Props) =>
           <Input type='email' name='email' placeholder='Digite seu e-mail' />
           <Input type='password' name='password' placeholder='Digite sua senha' />
 
-          <button
-            data-testid='submit'
-            disabled={!!state.emailError || !!state.passwordError}
-            className={styles.submit}
-            type='submit'
-          >
-            Entrar
-          </button>
+          <SubmitButton text='Entrar' />
 
           <Link to='/signup' data-testid='signup-link' className={styles.link}>
             Criar conta

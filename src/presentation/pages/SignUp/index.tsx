@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { AddAccount, SaveAccessToken } from '@/domain/usecases';
-import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components';
+import { LoginHeader, Footer, FormStatus, Input, SubmitButton } from '@/presentation/components';
 import { FormContextProvider } from '@/presentation/contexts/form';
 import { Validation } from '@/presentation/protocols/validation';
 
@@ -19,6 +19,7 @@ export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
 
   const [state, setState] = useState({
     isLoading: false,
+    isFormInvalid: true,
     name: '',
     email: '',
     password: '',
@@ -31,15 +32,21 @@ export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
   });
 
   useEffect(() => {
+    const nameError = validation.validate('name', state.name);
+    const emailError = validation.validate('email', state.email);
+    const passwordError = validation.validate('password', state.password);
+    const passwordConfirmationError = validation.validate(
+      'passwordConfirmation',
+      state.passwordConfirmation,
+    );
+
     setState({
       ...state,
-      nameError: validation.validate('name', state.name),
-      emailError: validation.validate('email', state.email),
-      passwordError: validation.validate('password', state.password),
-      passwordConfirmationError: validation.validate(
-        'passwordConfirmation',
-        state.passwordConfirmation,
-      ),
+      nameError,
+      emailError,
+      passwordError,
+      passwordConfirmationError,
+      isFormInvalid: !!nameError || !!emailError || !!passwordError || !!passwordConfirmationError,
     });
   }, [state.name, state.email, state.password, state.passwordConfirmation]);
 
@@ -47,13 +54,7 @@ export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
     event.preventDefault();
 
     try {
-      if (
-        state.isLoading ||
-        state.nameError ||
-        state.emailError ||
-        state.passwordError ||
-        state.passwordConfirmationError
-      ) {
+      if (state.isLoading || state.isFormInvalid) {
         return;
       }
 
@@ -89,19 +90,7 @@ export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
           <Input type='password' name='password' placeholder='Digite sua senha' />
           <Input type='password' name='passwordConfirmation' placeholder='Repita sua senha' />
 
-          <button
-            data-testid='submit'
-            disabled={
-              !!state.nameError ||
-              !!state.emailError ||
-              !!state.passwordError ||
-              !!state.passwordConfirmationError
-            }
-            className={styles.submit}
-            type='submit'
-          >
-            Criar
-          </button>
+          <SubmitButton text='Cadastrar' />
 
           <Link to='/login' data-testid='login-link' className={styles.link} replace>
             Voltar para Login
