@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { AddAccount, SaveAccessToken } from '@/domain/usecases';
 import { LoginHeader, Footer, FormStatus, Input } from '@/presentation/components';
@@ -103,7 +103,9 @@ export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
             Criar
           </button>
 
-          <span className={styles.link}>Voltar para Login</span>
+          <Link to='/login' data-testid='login-link' className={styles.link} replace>
+            Voltar para Login
+          </Link>
 
           <FormStatus />
         </form>
