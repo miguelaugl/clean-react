@@ -53,6 +53,8 @@ export const Login = ({ validation, authentication, saveAccessToken }: Props) =>
     const emailError = validation.validate('email', formData);
     const passwordError = validation.validate('password', formData);
 
+    console.log(emailError);
+
     setState({
       ...state,
       emailError,
