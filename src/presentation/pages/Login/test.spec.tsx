@@ -95,7 +95,7 @@ describe('Login Component', () => {
     FormHelper.testStatusForField(sut, 'password', validationError);
   });
 
-  it('should show valid password state if Validation succeeds', () => {
+  it('should show valid email state if Validation succeeds', () => {
     const { sut } = makeSut();
     FormHelper.populateField(sut, 'email');
     FormHelper.testStatusForField(sut, 'email');
