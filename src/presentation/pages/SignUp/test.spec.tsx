@@ -2,12 +2,13 @@ import { cleanup, fireEvent, render, RenderResult, waitFor } from '@testing-libr
 import faker from 'faker';
 import React from 'react';
 
-import { FormHelper, ValidationStub } from '@/presentation/test';
+import { AddAccountSpy, FormHelper, ValidationStub } from '@/presentation/test';
 
 import { SignUp } from '.';
 
 type SutTypes = {
   sut: RenderResult;
+  addAccountSpy: AddAccountSpy;
 };
 
 type SutParams = {
@@ -17,9 +18,11 @@ type SutParams = {
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub();
   validationStub.errorMessage = params?.validationError;
-  const sut = render(<SignUp validation={validationStub} />);
+  const addAccountSpy = new AddAccountSpy();
+  const sut = render(<SignUp validation={validationStub} addAccount={addAccountSpy} />);
   return {
     sut,
+    addAccountSpy,
   };
 };
 
@@ -107,12 +110,9 @@ describe('SignUp Component', () => {
     FormHelper.testStatusForField(sut, 'passwordConfirmation');
   });
 
-  it('should enable submit button if form is valid', () => {
+  it('should enable submit button if form is valid', async () => {
     const { sut } = makeSut();
-    FormHelper.populateField(sut, 'name');
-    FormHelper.populateField(sut, 'email');
-    FormHelper.populateField(sut, 'password');
-    FormHelper.populateField(sut, 'passwordConfirmation');
+    await simulateValidSubmit(sut);
     FormHelper.testButtonIsDisabled(sut, 'submit', false);
   });
 
@@ -120,5 +120,26 @@ describe('SignUp Component', () => {
     const { sut } = makeSut();
     await simulateValidSubmit(sut);
     FormHelper.testElementExists(sut, 'spinner');
+  });
+
+  it('should call AddAccount with correct values', async () => {
+    const { sut, addAccountSpy } = makeSut();
+    const name = faker.name.findName();
+    const email = faker.internet.email();
+    const password = faker.internet.password();
+    await simulateValidSubmit(sut, name, email, password);
+    expect(addAccountSpy.params).toEqual({
+      name,
+      email,
+      password,
+      passwordConfirmation: password,
+    });
+  });
+
+  it('should call AddAccount only once', async () => {
+    const { sut, addAccountSpy } = makeSut();
+    await simulateValidSubmit(sut);
+    await simulateValidSubmit(sut);
+    expect(addAccountSpy.callsCount).toBe(1);
   });
 });
