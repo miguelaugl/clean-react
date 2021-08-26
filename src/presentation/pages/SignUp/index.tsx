@@ -50,7 +50,17 @@ export const SignUp = ({ validation }: Props) => {
           <Input type='password' name='password' placeholder='Digite sua senha' />
           <Input type='password' name='passwordConfirmation' placeholder='Repita sua senha' />
 
-          <button data-testid='submit' disabled className={styles.submit} type='submit'>
+          <button
+            data-testid='submit'
+            disabled={
+              !!state.nameError ||
+              !!state.emailError ||
+              !!state.passwordError ||
+              !!state.passwordConfirmationError
+            }
+            className={styles.submit}
+            type='submit'
+          >
             Criar
           </button>
 
