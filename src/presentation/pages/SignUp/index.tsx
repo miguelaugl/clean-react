@@ -15,9 +15,10 @@ export const SignUp = ({ validation }: Props) => {
     isLoading: false,
     name: '',
     email: '',
+    password: '',
     nameError: '',
     emailError: '',
-    passwordError: 'Campo obrigatório',
+    passwordError: '',
     passwordConfirmationError: 'Campo obrigatório',
     mainError: '',
   });
@@ -27,8 +28,9 @@ export const SignUp = ({ validation }: Props) => {
       ...state,
       nameError: validation.validate('name', state.name),
       emailError: validation.validate('email', state.email),
+      passwordError: validation.validate('password', state.password),
     });
-  }, [state.name, state.email]);
+  }, [state.name, state.email, state.password]);
 
   return (
     <div className={styles.signUp}>
