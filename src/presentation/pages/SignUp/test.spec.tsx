@@ -56,7 +56,7 @@ describe('SignUp Component', () => {
     const validationError = faker.random.words();
     const { sut } = makeSut({ validationError });
 
-    FormHelper.populateField(sut, 'email');
+    FormHelper.populateField(sut, 'password');
     FormHelper.testStatusForField(sut, 'password', validationError);
   });
 });
