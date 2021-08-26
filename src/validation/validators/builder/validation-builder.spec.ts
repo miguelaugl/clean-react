@@ -4,9 +4,9 @@ import {
   RequiredFieldValidation,
   EmailValidation,
   MinLengthValidation,
+  CompareFieldsValidation,
 } from '@/validation/validators';
 
-import { CompareFieldsValidation } from '../compare-fields/compare-fields-validation';
 import { ValidationBuilder as sut } from './validation-builder';
 
 describe('ValidationBuilder', () => {
