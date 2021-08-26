@@ -57,11 +57,6 @@ const simulateValidSubmit = async (
   await waitFor(() => form);
 };
 
-const testElementExists = (sut: RenderResult, elementName: string) => {
-  const el = sut.getByTestId(elementName);
-  expect(el).toBeTruthy();
-};
-
 const testElementText = (sut: RenderResult, elementName: string, text: string) => {
   const el = sut.getByTestId(elementName);
   expect(el.textContent).toBe(text);
@@ -117,7 +112,7 @@ describe('Login Component', () => {
   it('should show spinner on submit', async () => {
     const { sut } = makeSut();
     await simulateValidSubmit(sut);
-    testElementExists(sut, 'spinner');
+    FormHelper.testElementExists(sut, 'spinner');
   });
 
   it('should call Authentication with correct values', async () => {
