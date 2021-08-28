@@ -1,7 +1,7 @@
 import faker from 'faker';
 
 import * as FormHelper from '../support/form-helper';
-import * as SignUpMocks from '../support/signup-mocks';
+import * as Http from '../support/signup-mocks';
 
 const populateFields = (): void => {
   cy.getByTestId('name').focus().type(faker.name.findName());
@@ -68,35 +68,35 @@ describe('SignUp', () => {
   });
 
   it('should present EmailInUseError on 403', () => {
-    SignUpMocks.mockEmailInUseError();
+    Http.mockEmailInUseError();
     simulateValidSubmit();
     FormHelper.testMainError('Esse e-mail já está em uso');
     FormHelper.testUrl('/signup');
   });
 
   it('should present UnexpectedError on default error cases', () => {
-    SignUpMocks.mockUnexpectedError();
+    Http.mockUnexpectedError();
     simulateValidSubmit();
     FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve.');
     FormHelper.testUrl('/signup');
   });
 
   it('should present UnexpectedError if invalid data is returned', () => {
-    SignUpMocks.mockInvalidData();
+    Http.mockInvalidData();
     simulateValidSubmit();
     FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve.');
     FormHelper.testUrl('/signup');
   });
 
   it('should prevent multiple submits', () => {
-    SignUpMocks.mockOk();
+    Http.mockOk();
     populateFields();
     cy.getByTestId('submit').dblclick();
     FormHelper.testHttpCallsCount(1);
   });
 
   it('should save accessToken if valid credentials are provided', () => {
-    SignUpMocks.mockOk();
+    Http.mockOk();
     simulateValidSubmit();
     cy.getByTestId('main-error').should('not.exist');
     cy.getByTestId('spinner').should('not.exist');
@@ -105,7 +105,7 @@ describe('SignUp', () => {
   });
 
   it('should not call submit if form is invalid', () => {
-    SignUpMocks.mockOk();
+    Http.mockOk();
     cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}');
     FormHelper.testHttpCallsCount(0);
   });
