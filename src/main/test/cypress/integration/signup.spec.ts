@@ -83,4 +83,15 @@ describe('SignUp', () => {
     FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve.');
     FormHelper.testUrl('/signup');
   });
+
+  it('should prevent multiple submits', () => {
+    SignUpMocks.mockOk();
+    cy.getByTestId('name').focus().type(faker.name.findName());
+    cy.getByTestId('email').focus().type(faker.internet.email());
+    const password = faker.random.alphaNumeric(7);
+    cy.getByTestId('password').focus().type(password);
+    cy.getByTestId('passwordConfirmation').focus().type(password);
+    cy.getByTestId('submit').dblclick();
+    FormHelper.testHttpCallsCount(1);
+  });
 });
