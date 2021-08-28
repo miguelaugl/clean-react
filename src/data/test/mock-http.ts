@@ -7,19 +7,19 @@ import {
   HttpStatusCode,
 } from '@/data/protocols/http';
 
-export const mockPostRequest = (): HttpPostParams<any> => ({
+export const mockPostRequest = (): HttpPostParams => ({
   url: faker.internet.url(),
   body: faker.random.objectElement(),
 });
 
-export class HttpPostClientSpy<T, R> implements HttpPostClient<T, R> {
+export class HttpPostClientSpy<R> implements HttpPostClient<R> {
   url?: string;
-  body?: T;
+  body?: any;
   response: HttpResponse<R> = {
     statusCode: HttpStatusCode.SUCCESS,
   };
 
-  async post({ url, body }: HttpPostParams<T>): Promise<HttpResponse<R>> {
+  async post({ url, body }: HttpPostParams): Promise<HttpResponse<R>> {
     this.url = url;
     this.body = body;
     return Promise.resolve(this.response);
