@@ -20,26 +20,30 @@ export const Input = (props: Props) => {
   };
 
   return (
-    <div className={styles.inputWrap}>
+    <div
+      data-testid={`${props.name}-wrap`}
+      className={styles.inputWrap}
+      data-status={error ? 'invalid' : 'valid'}
+    >
       <input
         {...props}
         ref={inputRef}
         placeholder=' '
+        title={error}
         data-testid={props.name}
         readOnly
         onFocus={enableInput}
         onChange={handleChange}
       />
-      <label onClick={() => inputRef.current.focus()} htmlFor={props.id} aria-hidden='true'>
+      <label
+        data-testid={`${props.name}-label`}
+        onClick={() => inputRef.current.focus()}
+        htmlFor={props.id}
+        aria-hidden='true'
+        title={error}
+      >
         {props.placeholder}
       </label>
-      <span
-        data-testid={`${props.name}-status`}
-        title={error || 'Tudo certo'}
-        className={styles.status}
-      >
-        {error ? '🔴' : '🟢'}
-      </span>
     </div>
   );
 };
