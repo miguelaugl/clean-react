@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { useForm } from '@/presentation/contexts/form';
 
@@ -9,33 +9,36 @@ type Props = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>
 export const Input = (props: Props) => {
   const { state, setState } = useForm();
   const error = state[`${props.name}Error`];
+  const inputRef = useRef<HTMLInputElement>();
 
   const enableInput = (event: React.FocusEvent<HTMLInputElement>): void => {
     event.target.readOnly = false;
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.value,
-    });
+    setState({ ...state, [event.target.name]: event.target.value });
   };
-
-  const getStatus = (): string => (error ? '🔴' : '🟢');
-
-  const getTitle = (): string => error || 'Tudo certo';
 
   return (
     <div className={styles.inputWrap}>
       <input
         {...props}
+        ref={inputRef}
+        placeholder=' '
         data-testid={props.name}
         readOnly
         onFocus={enableInput}
         onChange={handleChange}
       />
-      <span data-testid={`${props.name}-status`} title={getTitle()} className={styles.status}>
-        {getStatus()}
+      <label onClick={() => inputRef.current.focus()} htmlFor={props.id} aria-hidden='true'>
+        {props.placeholder}
+      </label>
+      <span
+        data-testid={`${props.name}-status`}
+        title={error || 'Tudo certo'}
+        className={styles.status}
+      >
+        {error ? '🔴' : '🟢'}
       </span>
     </div>
   );
