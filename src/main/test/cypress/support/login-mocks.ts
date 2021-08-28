@@ -1,6 +1,6 @@
 import faker from 'faker';
 
-import * as HttpMocks from '../support/http-mocks';
+import * as HttpMocks from './http-mocks';
 
 export const mockInvalidCredentialsError = (): void =>
   HttpMocks.mockInvalidCredentialsError(/login/);
