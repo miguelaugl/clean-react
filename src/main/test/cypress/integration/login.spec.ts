@@ -3,9 +3,13 @@ import faker from 'faker';
 import * as FormHelper from '../support/form-helper';
 import * as LoginMocks from '../support/login-mocks';
 
-const simulateValidSubmit = (): void => {
+const populateFields = (): void => {
   cy.getByTestId('email').focus().type(faker.internet.email());
   cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
+};
+
+const simulateValidSubmit = (): void => {
+  populateFields();
   cy.getByTestId('submit').click();
 };
 
@@ -43,8 +47,7 @@ describe('Login', () => {
 
   it('should present InvalidCredentialsError on 401', () => {
     LoginMocks.mockInvalidCredentialsError();
-    cy.getByTestId('email').focus().type(faker.internet.email());
-    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
+    populateFields();
     cy.getByTestId('submit').click().should('not.have.attr', 'disabled');
     FormHelper.testMainError('Credenciais inválidas');
     FormHelper.testUrl('/login');
@@ -76,8 +79,7 @@ describe('Login', () => {
 
   it('should prevent multiple submits', () => {
     LoginMocks.mockOk();
-    cy.getByTestId('email').focus().type(faker.internet.email());
-    cy.getByTestId('password').focus().type(faker.random.alphaNumeric(5));
+    populateFields();
     cy.getByTestId('submit').dblclick();
     FormHelper.testHttpCallsCount(1);
   });
