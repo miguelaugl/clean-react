@@ -94,4 +94,13 @@ describe('SignUp', () => {
     cy.getByTestId('submit').dblclick();
     FormHelper.testHttpCallsCount(1);
   });
+
+  it('should save accessToken if valid credentials are provided', () => {
+    SignUpMocks.mockOk();
+    simulateValidSubmit();
+    cy.getByTestId('main-error').should('not.exist');
+    cy.getByTestId('spinner').should('not.exist');
+    FormHelper.testUrl('/');
+    FormHelper.testLocalStorageItem('accessToken');
+  });
 });
