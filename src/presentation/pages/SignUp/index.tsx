@@ -77,7 +77,7 @@ export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
   };
 
   return (
-    <div className={styles.signUp}>
+    <div className={styles.signUpWrap}>
       <LoginHeader />
 
       <FormContextProvider value={{ state, setState }}>
