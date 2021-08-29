@@ -25,6 +25,7 @@ export const SurveyList = () => {
             </div>
             <footer>Ver resultado</footer>
           </li>
+          <li />
         </ul>
       </div>
       <Footer />
