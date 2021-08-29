@@ -5,7 +5,6 @@ module.exports = {
     '!<rootDir>/src/domain/**/index.ts',
     '!<rootDir>/src/validation/**/index.ts',
     '!<rootDir>/src/main/**/*',
-    '!<rootDir>/src/presentation/components/Router/**/*',
     '!**/*.d.ts',
   ],
   coverageDirectory: 'coverage',
