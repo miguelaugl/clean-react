@@ -1,21 +1,14 @@
 import React from 'react';
 
-import { Footer, Logo } from '@/presentation/components';
+import { Footer, Header } from '@/presentation/components';
 
 import styles from './styles.scss';
 
-const SurveyList: React.FC = () => {
+export const SurveyList = () => {
   return (
     <div className={styles.surveyListWrap}>
-      <header className={styles.headerWrap}>
-        <div className={styles.headerContent}>
-          <Logo />
-          <div className={styles.logoutWrap}>
-            <span>Miguel</span>
-            <a href='/'>Sair</a>
-          </div>
-        </div>
-      </header>
+      <Header />
+
       <div className={styles.contentWrap}>
         <h2>Enquetes</h2>
         <ul>
@@ -43,5 +36,3 @@ const SurveyList: React.FC = () => {
     </div>
   );
 };
-
-export default SurveyList;

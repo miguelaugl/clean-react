@@ -6,3 +6,4 @@ export * from './Spinner';
 export * from './LoginHeader';
 export * from './Router';
 export * from './SubmitButton';
+export * from './Header';

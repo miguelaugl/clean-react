@@ -8,52 +8,6 @@
   flex-direction: column;
   justify-content: space-between;
 
-  .headerWrap {
-    background-color: $primary;
-    border-top: 40px solid $primaryDark;
-
-    display: flex;
-    justify-content: center;
-
-    .headerContent {
-      max-width: 800px;
-      padding: 24px 40px;
-
-      display: flex;
-      flex-grow: 1;
-      justify-content: space-between;
-
-      img {
-        width: 60px;
-        align-self: center;
-      }
-
-      .logoutWrap {
-        align-self: center;
-        color: $white;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
-
-        span {
-          font-size: 16px;
-          margin-bottom: 8px;
-        }
-
-        a {
-          color: $white;
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
-
   .contentWrap {
     padding: 40px;
     width: 100%;
