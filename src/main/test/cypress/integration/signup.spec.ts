@@ -95,13 +95,13 @@ describe('SignUp', () => {
     FormHelper.testHttpCallsCount(1);
   });
 
-  it('should save accessToken if valid credentials are provided', () => {
+  it('should save account if valid credentials are provided', () => {
     Http.mockOk();
     simulateValidSubmit();
     cy.getByTestId('main-error').should('not.exist');
     cy.getByTestId('spinner').should('not.exist');
     FormHelper.testUrl('/');
-    FormHelper.testLocalStorageItem('accessToken');
+    FormHelper.testLocalStorageItem('account');
   });
 
   it('should not call submit if form is invalid', () => {

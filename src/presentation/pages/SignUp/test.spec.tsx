@@ -8,7 +8,7 @@ import { EmailInUseError } from '@/domain/errors';
 import {
   AddAccountSpy,
   FormHelper,
-  SaveAccessTokenMock,
+  UpdateCurrentAccountMock,
   ValidationStub,
 } from '@/presentation/test';
 
@@ -17,7 +17,7 @@ import { SignUp } from '.';
 type SutTypes = {
   sut: RenderResult;
   addAccountSpy: AddAccountSpy;
-  saveAccessTokenMock: SaveAccessTokenMock;
+  updateCurrentAccountMock: UpdateCurrentAccountMock;
 };
 
 type SutParams = {
@@ -26,7 +26,7 @@ type SutParams = {
 
 const history = createMemoryHistory({ initialEntries: ['/signup'] });
 const makeSut = (params?: SutParams): SutTypes => {
-  const saveAccessTokenMock = new SaveAccessTokenMock();
+  const updateCurrentAccountMock = new UpdateCurrentAccountMock();
   const validationStub = new ValidationStub();
   validationStub.errorMessage = params?.validationError;
   const addAccountSpy = new AddAccountSpy();
@@ -35,14 +35,14 @@ const makeSut = (params?: SutParams): SutTypes => {
       <SignUp
         validation={validationStub}
         addAccount={addAccountSpy}
-        saveAccessToken={saveAccessTokenMock}
+        updateCurrentAccount={updateCurrentAccountMock}
       />
     </Router>,
   );
   return {
     sut,
     addAccountSpy,
-    saveAccessTokenMock,
+    updateCurrentAccountMock,
   };
 };
 
@@ -180,17 +180,17 @@ describe('SignUp Component', () => {
   });
 
   it('should call SaveAcessToken on success', async () => {
-    const { sut, addAccountSpy, saveAccessTokenMock } = makeSut();
+    const { sut, addAccountSpy, updateCurrentAccountMock } = makeSut();
     await simulateValidSubmit(sut);
-    expect(saveAccessTokenMock.accessToken).toBe(addAccountSpy.account.accessToken);
+    expect(updateCurrentAccountMock.account).toEqual(addAccountSpy.account);
     expect(history.length).toBe(1);
     expect(history.location.pathname).toBe('/');
   });
 
   it('should present error if SaveAcessToken throws', async () => {
-    const { sut, saveAccessTokenMock } = makeSut();
+    const { sut, updateCurrentAccountMock } = makeSut();
     const error = new EmailInUseError();
-    jest.spyOn(saveAccessTokenMock, 'save').mockRejectedValueOnce(error);
+    jest.spyOn(updateCurrentAccountMock, 'save').mockRejectedValueOnce(error);
     await simulateValidSubmit(sut);
     FormHelper.testElementText(sut, 'main-error', error.message);
     FormHelper.testChildCount(sut, 'error-wrap', 1);

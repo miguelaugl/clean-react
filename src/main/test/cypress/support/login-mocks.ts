@@ -8,7 +8,10 @@ export const mockInvalidCredentialsError = (): void =>
 export const mockUnexpectedError = (): void => HttpMocks.mockUnexpectedError(/login/, 'POST');
 
 export const mockOk = (): void =>
-  HttpMocks.mockOk(/login/, 'POST', { accessToken: faker.datatype.uuid() });
+  HttpMocks.mockOk(/login/, 'POST', {
+    accessToken: faker.datatype.uuid(),
+    name: faker.name.findName(),
+  });
 
 export const mockInvalidData = (): void =>
   HttpMocks.mockOk(/login/, 'POST', { invalidProperty: faker.datatype.uuid() });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { AddAccount, SaveAccessToken } from '@/domain/usecases';
+import { AddAccount, UpdateCurrentAccount } from '@/domain/usecases';
 import { LoginHeader, Footer, FormStatus, Input, SubmitButton } from '@/presentation/components';
 import { FormContextProvider } from '@/presentation/contexts/form';
 import { Validation } from '@/presentation/protocols/validation';
@@ -11,10 +11,10 @@ import styles from './styles.scss';
 type Props = {
   validation: Validation;
   addAccount: AddAccount;
-  saveAccessToken: SaveAccessToken;
+  updateCurrentAccount: UpdateCurrentAccount;
 };
 
-export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
+export const SignUp = ({ validation, addAccount, updateCurrentAccount }: Props) => {
   const history = useHistory();
 
   const [state, setState] = useState({
@@ -65,7 +65,7 @@ export const SignUp = ({ validation, addAccount, saveAccessToken }: Props) => {
         password: state.password,
         passwordConfirmation: state.passwordConfirmation,
       });
-      await saveAccessToken.save(account.accessToken);
+      await updateCurrentAccount.save(account);
       history.replace('/');
     } catch (error) {
       setState({

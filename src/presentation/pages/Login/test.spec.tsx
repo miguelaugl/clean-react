@@ -9,14 +9,14 @@ import { Login } from '@/presentation/pages';
 import {
   ValidationStub,
   AuthenticationSpy,
-  SaveAccessTokenMock,
+  UpdateCurrentAccountMock,
   FormHelper,
 } from '@/presentation/test';
 
 type SutTypes = {
   sut: RenderResult;
   authenticationSpy: AuthenticationSpy;
-  saveAccessTokenMock: SaveAccessTokenMock;
+  updateCurrentAccountMock: UpdateCurrentAccountMock;
 };
 
 type SutParams = {
@@ -25,7 +25,7 @@ type SutParams = {
 
 const history = createMemoryHistory({ initialEntries: ['/login'] });
 const makeSut = (params?: SutParams): SutTypes => {
-  const saveAccessTokenMock = new SaveAccessTokenMock();
+  const updateCurrentAccountMock = new UpdateCurrentAccountMock();
   const validationStub = new ValidationStub();
   const authenticationSpy = new AuthenticationSpy();
   validationStub.errorMessage = params?.validationError;
@@ -34,14 +34,14 @@ const makeSut = (params?: SutParams): SutTypes => {
       <Login
         validation={validationStub}
         authentication={authenticationSpy}
-        saveAccessToken={saveAccessTokenMock}
+        updateCurrentAccount={updateCurrentAccountMock}
       />
     </Router>,
   );
   return {
     sut,
     authenticationSpy,
-    saveAccessTokenMock,
+    updateCurrentAccountMock,
   };
 };
 
@@ -145,17 +145,17 @@ describe('Login Component', () => {
   });
 
   it('should call SaveAcessToken on success', async () => {
-    const { sut, authenticationSpy, saveAccessTokenMock } = makeSut();
+    const { sut, authenticationSpy, updateCurrentAccountMock } = makeSut();
     await simulateValidSubmit(sut);
-    expect(saveAccessTokenMock.accessToken).toBe(authenticationSpy.account.accessToken);
+    expect(updateCurrentAccountMock.account).toEqual(authenticationSpy.account);
     expect(history.length).toBe(1);
     expect(history.location.pathname).toBe('/');
   });
 
   it('should present error if SaveAcessToken throws', async () => {
-    const { sut, saveAccessTokenMock } = makeSut();
+    const { sut, updateCurrentAccountMock } = makeSut();
     const error = new InvalidCredentialsError();
-    jest.spyOn(saveAccessTokenMock, 'save').mockReturnValueOnce(Promise.reject(error));
+    jest.spyOn(updateCurrentAccountMock, 'save').mockReturnValueOnce(Promise.reject(error));
     await simulateValidSubmit(sut);
     FormHelper.testElementText(sut, 'main-error', error.message);
     FormHelper.testChildCount(sut, 'error-wrap', 1);
