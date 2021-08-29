@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useForm } from '@/presentation/contexts/form';
+import { useForm } from '@/presentation/contexts';
 
 type Props = {
   text: string;

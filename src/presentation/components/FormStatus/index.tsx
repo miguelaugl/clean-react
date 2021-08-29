@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Spinner } from '@/presentation/components/Spinner';
-import { useForm } from '@/presentation/contexts/form';
+import { useForm } from '@/presentation/contexts';
 
 import styles from './styles.scss';
 

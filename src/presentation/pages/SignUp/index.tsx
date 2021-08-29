@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { AddAccount, UpdateCurrentAccount } from '@/domain/usecases';
+import { AddAccount } from '@/domain/usecases';
 import { LoginHeader, Footer, FormStatus, Input, SubmitButton } from '@/presentation/components';
-import { FormContextProvider } from '@/presentation/contexts/form';
+import { ApiContext, FormContextProvider } from '@/presentation/contexts';
 import { Validation } from '@/presentation/protocols/validation';
 
 import styles from './styles.scss';
@@ -11,10 +11,11 @@ import styles from './styles.scss';
 type Props = {
   validation: Validation;
   addAccount: AddAccount;
-  updateCurrentAccount: UpdateCurrentAccount;
 };
 
-export const SignUp = ({ validation, addAccount, updateCurrentAccount }: Props) => {
+export const SignUp = ({ validation, addAccount }: Props) => {
+  const { setCurrentAccount } = useContext(ApiContext);
+
   const history = useHistory();
 
   const [state, setState] = useState({
@@ -65,7 +66,7 @@ export const SignUp = ({ validation, addAccount, updateCurrentAccount }: Props) 
         password: state.password,
         passwordConfirmation: state.passwordConfirmation,
       });
-      await updateCurrentAccount.save(account);
+      setCurrentAccount(account);
       history.replace('/');
     } catch (error) {
       setState({

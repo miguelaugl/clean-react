@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { Authentication, UpdateCurrentAccount } from '@/domain/usecases';
+import { Authentication } from '@/domain/usecases';
 import { LoginHeader, Footer, FormStatus, Input, SubmitButton } from '@/presentation/components';
-import { FormContextProvider } from '@/presentation/contexts/form';
+import { FormContextProvider, ApiContext } from '@/presentation/contexts';
 import { Validation } from '@/presentation/protocols/validation';
 
 import styles from './styles.scss';
@@ -11,10 +11,10 @@ import styles from './styles.scss';
 type Props = {
   validation: Validation;
   authentication: Authentication;
-  updateCurrentAccount: UpdateCurrentAccount;
 };
 
-export const Login = ({ validation, authentication, updateCurrentAccount }: Props) => {
+export const Login = ({ validation, authentication }: Props) => {
+  const { setCurrentAccount } = useContext(ApiContext);
   const history = useHistory();
   const [state, setState] = useState({
     isLoading: false,
@@ -36,7 +36,7 @@ export const Login = ({ validation, authentication, updateCurrentAccount }: Prop
 
       setState({ ...state, isLoading: true });
       const account = await authentication.auth({ email: state.email, password: state.password });
-      await updateCurrentAccount.save(account);
+      setCurrentAccount(account);
       history.replace('/');
     } catch (error) {
       setState({

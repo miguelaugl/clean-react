@@ -2,7 +2,7 @@ import { fireEvent, render, RenderResult } from '@testing-library/react';
 import faker from 'faker';
 import React from 'react';
 
-import { FormContextProvider } from '@/presentation/contexts/form';
+import { FormContextProvider } from '@/presentation/contexts';
 
 import { Input } from '.';
 
