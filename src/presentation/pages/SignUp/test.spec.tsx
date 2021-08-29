@@ -57,8 +57,8 @@ describe('SignUp Component', () => {
   it('should start with initial state', () => {
     const validationError = faker.random.words();
     makeSut({ validationError });
-    FormHelper.testChildCount('error-wrap', 0);
-    FormHelper.testButtonIsDisabled('submit');
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(0);
+    expect(screen.getByTestId('submit')).toBeDisabled();
     FormHelper.testStatusForField('name', validationError);
     FormHelper.testStatusForField('email', validationError);
     FormHelper.testStatusForField('password', validationError);
@@ -123,13 +123,13 @@ describe('SignUp Component', () => {
   it('should enable submit button if form is valid', async () => {
     makeSut();
     await simulateValidSubmit();
-    FormHelper.testButtonIsDisabled('submit', false);
+    expect(screen.getByTestId('submit')).toBeEnabled();
   });
 
   it('should show spinner on submit', async () => {
     makeSut();
     await simulateValidSubmit();
-    FormHelper.testElementExists('spinner');
+    expect(screen.queryByTestId('spinner')).toBeInTheDocument();
   });
 
   it('should call AddAccount with correct values', async () => {
@@ -165,8 +165,8 @@ describe('SignUp Component', () => {
     const error = new EmailInUseError();
     jest.spyOn(addAccountSpy, 'add').mockRejectedValueOnce(error);
     await simulateValidSubmit();
-    FormHelper.testElementText('main-error', error.message);
-    FormHelper.testChildCount('error-wrap', 1);
+    expect(screen.getByTestId('main-error')).toHaveTextContent(error.message);
+    expect(screen.getByTestId('error-wrap').children).toHaveLength(1);
   });
 
   it('should call SaveAcessToken on success', async () => {
