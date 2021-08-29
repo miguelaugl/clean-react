@@ -7,3 +7,4 @@ export * from './LoginHeader';
 export * from './SubmitButton';
 export * from './Header';
 export * from './Icon';
+export * from './PrivateRoute';

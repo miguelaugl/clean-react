@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import {
   getCurrentAccountAdapter,
@@ -7,6 +7,7 @@ import {
 } from '@/main/adapters/current-account-adapter';
 import { makeLogin } from '@/main/factories/pages/login/login-factory';
 import { makeSignup } from '@/main/factories/pages/signup/signup-factory';
+import { PrivateRoute } from '@/presentation/components';
 import { ApiContext } from '@/presentation/contexts';
 import { SurveyList } from '@/presentation/pages';
 
@@ -21,7 +22,7 @@ export const Router = () => (
       <Switch>
         <Route path='/login' exact component={makeLogin} />
         <Route path='/signup' exact component={makeSignup} />
-        <Route path='/' exact component={SurveyList} />
+        <PrivateRoute path='/' exact component={SurveyList} />
       </Switch>
     </BrowserRouter>
   </ApiContext.Provider>
