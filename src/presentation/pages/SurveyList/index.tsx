@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Footer, Header } from '@/presentation/components';
 
+import { SurveyItemEmpty } from './components';
 import styles from './styles.scss';
 
 export const SurveyList = () => {
@@ -11,8 +12,8 @@ export const SurveyList = () => {
 
       <div className={styles.contentWrap}>
         <h2>Enquetes</h2>
-        <ul>
-          <li />
+        <ul data-testid='survey-list'>
+          <SurveyItemEmpty />
         </ul>
       </div>
       <Footer />
