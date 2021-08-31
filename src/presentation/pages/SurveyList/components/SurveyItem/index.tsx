@@ -10,17 +10,16 @@ type Props = {
 };
 
 export const SurveyItem = ({ survey }: Props) => {
+  const iconName = survey.didAnswer ? IconName.THUMB_UP : IconName.THUMB_DOWN;
+
   return (
     <li>
       <div className={styles.surveyContent}>
-        <Icon
-          className={styles.iconWrap}
-          iconName={survey.didAnswer ? IconName.THUMB_UP : IconName.THUMB_DOWN}
-        />
+        <Icon className={styles.iconWrap} iconName={iconName} />
 
         <time>
           <span data-testid='day' className={styles.day}>
-            {survey.date.getDate()}
+            {survey.date.getDate().toString().padStart(2, '0')}
           </span>
           <span data-testid='month' className={styles.month}>
             {survey.date
