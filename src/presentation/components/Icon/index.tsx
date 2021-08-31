@@ -17,7 +17,7 @@ export const Icon = ({ iconName, className }: Props) => {
 
   return (
     <div className={[styles.iconWrap, iconColor, className].join(' ')}>
-      <img className={styles.icon} src={iconName} alt='Thumbs down' />
+      <img data-testid='icon' className={styles.icon} src={iconName} alt='Thumbs down' />
     </div>
   );
 };
