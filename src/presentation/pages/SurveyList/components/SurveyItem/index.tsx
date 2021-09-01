@@ -13,7 +13,7 @@ export const SurveyItem = ({ survey }: Props) => {
   const iconName = survey.didAnswer ? IconName.THUMB_UP : IconName.THUMB_DOWN;
 
   return (
-    <li>
+    <li className={styles.surveyItemWrap}>
       <div className={styles.surveyContent}>
         <Icon className={styles.iconWrap} iconName={iconName} />
 
