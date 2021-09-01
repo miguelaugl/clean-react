@@ -4,7 +4,7 @@ import { SurveyModel } from '@/domain/models';
 import { LoadSurveyList } from '@/domain/usecases';
 import { Footer, Header } from '@/presentation/components';
 
-import { SurveyItem, SurveyItemEmpty } from './components';
+import { SurveyListContext, List, Error } from './components';
 import styles from './styles.scss';
 
 type Props = {
@@ -30,19 +30,10 @@ export const SurveyList = ({ loadSurveyList }: Props) => {
 
       <div className={styles.contentWrap}>
         <h2>Enquetes</h2>
-        {!!state.error && (
-          <div>
-            <span data-testid='error'>{state.error}</span>
-            <button type='button'>Recarregar</button>
-          </div>
-        )}
-        {!state.error && (
-          <ul data-testid='survey-list'>
-            {!!state.surveys.length &&
-              state.surveys.map((survey) => <SurveyItem key={survey.id} survey={survey} />)}
-            {!state.surveys.length && <SurveyItemEmpty />}
-          </ul>
-        )}
+        <SurveyListContext.Provider value={{ state, setState }}>
+          {!!state.error && <Error />}
+          {!state.error && <List />}
+        </SurveyListContext.Provider>
       </div>
       <Footer />
     </div>
