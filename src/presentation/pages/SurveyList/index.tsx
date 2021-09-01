@@ -15,6 +15,7 @@ export const SurveyList = ({ loadSurveyList }: Props) => {
   const [state, setState] = useState({
     surveys: [] as SurveyModel[],
     error: '',
+    reload: false,
   });
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export const SurveyList = ({ loadSurveyList }: Props) => {
       .loadAll()
       .then((surveys) => setState((prevState) => ({ ...prevState, surveys })))
       .catch((error) => setState((prevState) => ({ ...prevState, error: error.message })));
-  }, []);
+  }, [state.reload]);
 
   return (
     <div className={styles.surveyListWrap}>
