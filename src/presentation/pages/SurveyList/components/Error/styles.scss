@@ -1,1 +1,17 @@
-.errorWrap {}
+@import "../../../../styles/colors.scss";
+
+.errorWrap {
+  background-color: $white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 1px -3px -1px $black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  span {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+}
