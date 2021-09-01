@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { SurveyModel } from '@/domain/models';
+import { LoadSurveyList } from '@/domain/usecases';
 import {
   SurveyListContext,
   SurveyItem,
@@ -15,7 +15,9 @@ export const List = () => {
   return (
     <ul className={styles.listWrap} data-testid='survey-list'>
       {!!state.surveys.length &&
-        state.surveys.map((survey: SurveyModel) => <SurveyItem key={survey.id} survey={survey} />)}
+        state.surveys.map((survey: LoadSurveyList.Model) => (
+          <SurveyItem key={survey.id} survey={survey} />
+        ))}
       {!state.surveys.length && <SurveyItemEmpty />}
     </ul>
   );

@@ -71,7 +71,9 @@
     "no-unused-vars": "off",
     "no-restricted-syntax": "off",
     "newline-per-chained-call": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-redeclare": "off",
+    "import/export": "off"
 	},
   "settings": {
     "import/resolver": {
