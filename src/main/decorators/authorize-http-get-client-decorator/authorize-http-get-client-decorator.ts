@@ -1,7 +1,7 @@
 import { GetStorage } from '@/data/protocols/cache';
 import { HttpGetClient, HttpGetParams, HttpResponse } from '@/data/protocols/http';
 
-export class AuthorizeHttpGetClientDecotator implements HttpGetClient {
+export class AuthorizeHttpGetClientDecorator implements HttpGetClient {
   constructor(
     private readonly getStorage: GetStorage,
     private readonly httpGetClient: HttpGetClient,

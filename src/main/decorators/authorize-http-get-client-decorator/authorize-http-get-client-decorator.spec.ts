@@ -3,10 +3,10 @@ import faker from 'faker';
 import { HttpGetParams } from '@/data/protocols/http';
 import { GetStorageSpy, HttpGetClientSpy, mockGetRequest } from '@/data/test';
 import { mockAccountModel } from '@/domain/test';
-import { AuthorizeHttpGetClientDecotator } from '@/main/decorators';
+import { AuthorizeHttpGetClientDecorator } from '@/main/decorators';
 
 type SutTypes = {
-  sut: AuthorizeHttpGetClientDecotator;
+  sut: AuthorizeHttpGetClientDecorator;
   getStorageSpy: GetStorageSpy;
   httpGetClientSpy: HttpGetClientSpy;
 };
@@ -14,7 +14,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const getStorageSpy = new GetStorageSpy();
   const httpGetClientSpy = new HttpGetClientSpy();
-  const sut = new AuthorizeHttpGetClientDecotator(getStorageSpy, httpGetClientSpy);
+  const sut = new AuthorizeHttpGetClientDecorator(getStorageSpy, httpGetClientSpy);
   return {
     sut,
     getStorageSpy,
@@ -22,7 +22,7 @@ const makeSut = (): SutTypes => {
   };
 };
 
-describe('AuthorizeHttpGetClientDecotator', () => {
+describe('AuthorizeHttpGetClientDecorator', () => {
   it('should call GetStorage with correct value', async () => {
     const { sut, getStorageSpy } = makeSut();
     await sut.get(mockGetRequest());
