@@ -39,10 +39,7 @@ const makeSut = (params?: SutParams): SutTypes => {
   };
 };
 
-const simulateValidSubmit = async (
-  email = faker.internet.email(),
-  password = faker.internet.password(),
-): Promise<void> => {
+const simulateValidSubmit = async (email = faker.internet.email(), password = faker.internet.password()): Promise<void> => {
   FormHelper.populateField('email', email);
   FormHelper.populateField('password', password);
   const form = screen.getByTestId('form');

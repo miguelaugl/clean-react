@@ -20,11 +20,7 @@ export const Input = (props: Props) => {
   };
 
   return (
-    <div
-      data-testid={`${props.name}-wrap`}
-      className={styles.inputWrap}
-      data-status={error ? 'invalid' : 'valid'}
-    >
+    <div data-testid={`${props.name}-wrap`} className={styles.inputWrap} data-status={error ? 'invalid' : 'valid'}>
       <input
         {...props}
         ref={inputRef}
@@ -35,13 +31,7 @@ export const Input = (props: Props) => {
         onFocus={enableInput}
         onChange={handleChange}
       />
-      <label
-        data-testid={`${props.name}-label`}
-        onClick={() => inputRef.current.focus()}
-        htmlFor={props.id}
-        aria-hidden='true'
-        title={error}
-      >
+      <label data-testid={`${props.name}-label`} onClick={() => inputRef.current.focus()} htmlFor={props.id} aria-hidden='true' title={error}>
         {props.placeholder}
       </label>
     </div>

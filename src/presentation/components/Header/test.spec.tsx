@@ -18,9 +18,7 @@ const makeSut = (account = mockAccountModel()): SutTypes => {
   const setCurrentAccountMock = jest.fn();
   render(
     <Router history={history}>
-      <ApiContext.Provider
-        value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => account }}
-      >
+      <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => account }}>
         <Header />
       </ApiContext.Provider>
     </Router>,

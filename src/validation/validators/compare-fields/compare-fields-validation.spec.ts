@@ -4,8 +4,7 @@ import { InvalidFieldError } from '@/validation/errors';
 
 import { CompareFieldsValidation } from './compare-fields-validation';
 
-const makeSut = (field: string, fieldToCompare: string): CompareFieldsValidation =>
-  new CompareFieldsValidation(field, fieldToCompare);
+const makeSut = (field: string, fieldToCompare: string): CompareFieldsValidation => new CompareFieldsValidation(field, fieldToCompare);
 
 describe('CompareFieldsValidation', () => {
   it('should return error if compare is invalid', () => {

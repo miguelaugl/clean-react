@@ -6,8 +6,7 @@ export const mockEmailInUseError = (): void => HttpMocks.mockEmailInUseError(/si
 
 export const mockUnexpectedError = (): void => HttpMocks.mockUnexpectedError(/signup/, 'POST');
 
-export const mockInvalidData = (): void =>
-  HttpMocks.mockOk(/signup/, 'POST', { invalidProperty: faker.datatype.uuid() });
+export const mockInvalidData = (): void => HttpMocks.mockOk(/signup/, 'POST', { invalidProperty: faker.datatype.uuid() });
 
 export const mockOk = (): void =>
   HttpMocks.mockOk(/signup/, 'POST', {

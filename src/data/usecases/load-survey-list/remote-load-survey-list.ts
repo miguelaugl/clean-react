@@ -3,10 +3,7 @@ import { AccessDeniedError, UnexpectedError } from '@/domain/errors';
 import { LoadSurveyList } from '@/domain/usecases';
 
 export class RemoteLoadSurveyList implements LoadSurveyList {
-  constructor(
-    private readonly url: string,
-    private readonly httpGetClient: HttpGetClient<RemoteLoadSurveyList.Model[]>,
-  ) {}
+  constructor(private readonly url: string, private readonly httpGetClient: HttpGetClient<RemoteLoadSurveyList.Model[]>) {}
 
   async loadAll(): Promise<LoadSurveyList.Model[]> {
     const httpResponse = await this.httpGetClient.get({ url: this.url });

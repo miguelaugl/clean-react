@@ -2,12 +2,7 @@ import faker from 'faker';
 
 import { LoadSurveyList } from '@/domain/usecases';
 
-export const mockSurveyListModel = (): LoadSurveyList.Model[] => [
-  mockSurveyModel(),
-  mockSurveyModel(),
-  mockSurveyModel(),
-  mockSurveyModel(),
-];
+export const mockSurveyListModel = (): LoadSurveyList.Model[] => [mockSurveyModel(), mockSurveyModel(), mockSurveyModel(), mockSurveyModel()];
 
 export const mockSurveyModel = (): LoadSurveyList.Model => ({
   id: faker.datatype.uuid(),

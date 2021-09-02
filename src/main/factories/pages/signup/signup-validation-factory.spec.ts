@@ -1,10 +1,4 @@
-import {
-  CompareFieldsValidation,
-  EmailValidation,
-  MinLengthValidation,
-  RequiredFieldValidation,
-  ValidationComposite,
-} from '@/validation/validators';
+import { CompareFieldsValidation, EmailValidation, MinLengthValidation, RequiredFieldValidation, ValidationComposite } from '@/validation/validators';
 
 import { makeSignUpValidation } from './signup-validation-factory';
 
