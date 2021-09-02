@@ -3,7 +3,7 @@ import faker from 'faker';
 import { HttpStatusCode } from '@/data/protocols/http';
 import { HttpGetClientSpy } from '@/data/test';
 import { mockRemoteSurveyListModel } from '@/data/test/mock-remote-survey-list';
-import { UnexpectedError } from '@/domain/errors';
+import { AccessDeniedError, UnexpectedError } from '@/domain/errors';
 
 import { RemoteLoadSurveyList } from './remote-load-survey-list';
 
@@ -35,7 +35,7 @@ describe('RemoteLoadSurveyList', () => {
       statusCode: HttpStatusCode.FORBIDDEN,
     };
     const promise = sut.loadAll();
-    await expect(promise).rejects.toThrow(new UnexpectedError());
+    await expect(promise).rejects.toThrow(new AccessDeniedError());
   });
 
   it('should throw UnexpectedError if HttpGetClient returns 404', async () => {
