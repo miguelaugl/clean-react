@@ -1,8 +1,17 @@
 import faker from 'faker';
 
-import * as FormHelper from '../support/form-helpers';
-import * as Helper from '../support/helpers';
-import * as Http from '../support/login-mocks';
+import * as FormHelper from '../utils/form-helpers';
+import * as Helper from '../utils/helpers';
+import * as Http from '../utils/http-mocks';
+
+const path = /login/;
+export const mockInvalidCredentialsError = (): void => Http.mockUnauthorizedError(path);
+export const mockUnexpectedError = (): void => Http.mockServerError(path, 'POST');
+export const mockSuccess = (): void => {
+  cy.fixture('account').then((account) => {
+    Http.mockOk(path, 'POST', account);
+  });
+};
 
 const populateFields = (): void => {
   cy.getByTestId('email').focus().type(faker.internet.email());
@@ -47,7 +56,7 @@ describe('Login', () => {
   });
 
   it('should present InvalidCredentialsError on 401', () => {
-    Http.mockInvalidCredentialsError();
+    mockInvalidCredentialsError();
     populateFields();
     cy.getByTestId('submit').click().should('not.have.attr', 'disabled');
     FormHelper.testMainError('Credenciais inválidas');
@@ -55,14 +64,14 @@ describe('Login', () => {
   });
 
   it('should present UnexpectedError on 400', () => {
-    Http.mockUnexpectedError();
+    mockUnexpectedError();
     simulateValidSubmit();
     FormHelper.testMainError('Algo de errado aconteceu. Tente novamente em breve.');
     Helper.testUrl('/login');
   });
 
   it('should save account if valid credentials are provided', () => {
-    Http.mockOk();
+    mockSuccess();
     simulateValidSubmit();
     cy.getByTestId('main-error').should('not.exist');
     cy.getByTestId('spinner').should('not.exist');
@@ -71,14 +80,14 @@ describe('Login', () => {
   });
 
   it('should prevent multiple submits', () => {
-    Http.mockOk();
+    mockSuccess();
     populateFields();
     cy.getByTestId('submit').dblclick();
     Helper.testHttpCallsCount(1);
   });
 
   it('should not call submit if form is invalid', () => {
-    Http.mockOk();
+    mockSuccess();
     cy.getByTestId('email').focus().type(faker.internet.email()).type('{enter}');
     Helper.testHttpCallsCount(0);
   });
