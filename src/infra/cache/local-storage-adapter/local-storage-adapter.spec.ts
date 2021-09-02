@@ -2,8 +2,7 @@ import 'jest-localstorage-mock';
 import faker from 'faker';
 
 import { AccountModel } from '@/domain/models';
-
-import { LocalStorageAdapter } from './local-storage-adapter';
+import { LocalStorageAdapter } from '@/infra/cache';
 
 const makeSut = (): LocalStorageAdapter => new LocalStorageAdapter();
 
@@ -18,6 +17,13 @@ describe('LocalStorageAdapter', () => {
     const value = faker.random.objectElement<AccountModel>();
     sut.set(key, value);
     expect(localStorage.setItem).toHaveBeenCalledWith(key, JSON.stringify(value));
+  });
+
+  it('should call localStorage.removeItem if value is falsy', () => {
+    const sut = makeSut();
+    const key = faker.database.column();
+    sut.set(key, undefined);
+    expect(localStorage.removeItem).toHaveBeenCalledWith(key);
   });
 
   it('should call localStorage.getItem with correct value', () => {
