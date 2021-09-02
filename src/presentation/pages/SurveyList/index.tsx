@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
+import { AccessDeniedError } from '@/domain/errors';
 import { LoadSurveyList } from '@/domain/usecases';
 import { Footer, Header } from '@/presentation/components';
+import { ApiContext } from '@/presentation/contexts';
 
 import { SurveyListContext, List, Error } from './components';
 import styles from './styles.scss';
@@ -11,6 +14,10 @@ type Props = {
 };
 
 export const SurveyList = ({ loadSurveyList }: Props) => {
+  const history = useHistory();
+
+  const { setCurrentAccount } = useContext(ApiContext);
+
   const [state, setState] = useState({
     surveys: [] as LoadSurveyList.Model[],
     error: '',
@@ -21,7 +28,16 @@ export const SurveyList = ({ loadSurveyList }: Props) => {
     loadSurveyList
       .loadAll()
       .then((surveys) => setState((prevState) => ({ ...prevState, surveys })))
-      .catch((error) => setState((prevState) => ({ ...prevState, error: error.message })));
+      .catch((error) => {
+        if (error instanceof AccessDeniedError) {
+          setCurrentAccount(undefined);
+          history.replace('/login');
+
+          return;
+        }
+
+        setState((prevState) => ({ ...prevState, error: error.message }));
+      });
   }, [state.reload]);
 
   return (
