@@ -9,6 +9,6 @@ module.exports = {
   "jsxBracketSameLine": false,
   "arrowParens": "always",
   "endOfLine": "auto",
-  "printWidth": 100,
+  "printWidth": 150,
   "semi": true
 }

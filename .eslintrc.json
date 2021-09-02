@@ -43,6 +43,9 @@
     "jsx-quotes": ["error", "prefer-single"],
     "prettier/prettier": "error",
 		"unused-imports/no-unused-imports": "error",
+    "max-len": ["error", 150, {
+      "ignoreStrings": true
+    }],
 		"import/extensions": [
       "error",
       "ignorePackages",
