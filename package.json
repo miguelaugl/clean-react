@@ -6,7 +6,8 @@
   "author": "Miguel <miguelaugl@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack serve --open",
+    "dev": "webpack serve --config webpack.dev.js --open",
+    "build": "webpack --config webpack.prod.js",
     "prepare": "husky install",
     "lint": "eslint 'src/**'",
     "test": "jest --passWithNoTests --no-cache --runInBand",
@@ -47,11 +48,13 @@
     "eslint-plugin-unused-imports": "^1.1.4",
     "faker": "^5.5.3",
     "git-commit-msg-linter": "^3.2.8",
+    "html-webpack-plugin": "^5.3.2",
     "husky": "^7.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.6",
     "jest-localstorage-mock": "^2.4.17",
     "lint-staged": "^11.1.2",
+    "mini-css-extract-plugin": "^2.2.2",
     "node-sass": "^6.0.1",
     "prettier": "^2.3.2",
     "sass-loader": "^12.1.0",
@@ -61,7 +64,8 @@
     "typescript": "^4.3.5",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
