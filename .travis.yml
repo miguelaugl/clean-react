@@ -4,3 +4,8 @@ node_js:
 script:
   - yarn lint
   - yarn test:coveralls
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API
+  app: course-fordevs-react
+  skip_cleanup: true
