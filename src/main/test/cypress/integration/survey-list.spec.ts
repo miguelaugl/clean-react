@@ -3,7 +3,7 @@ import * as Http from '../utils/http-mocks';
 
 const path = /surveys/;
 export const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET');
-export const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'get');
+export const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET');
 export const mockSuccess = (): void => {
   cy.fixture('survey-list').then((surveyList) => {
     Http.mockOk(path, 'GET', surveyList);
@@ -38,13 +38,6 @@ describe('SurveyList', () => {
     Helper.testUrl('/login');
   });
 
-  it('should present correct username', () => {
-    mockUnexpectedError();
-    cy.visit('');
-    const { name } = Helper.getLocalStorageItem('account');
-    cy.getByTestId('username').should('have.text', name);
-  });
-
   it('should logout on logout link click', () => {
     mockUnexpectedError();
     cy.visit('');
@@ -75,5 +68,12 @@ describe('SurveyList', () => {
         assert.equal(li.find('[data-testid="icon"]').attr('src'), icons.thumbDown);
       });
     });
+  });
+
+  it('should present correct username', () => {
+    mockUnexpectedError();
+    cy.visit('');
+    const account = Helper.getLocalStorageItem('account');
+    cy.getByTestId('username').should('have.text', account.name);
   });
 });
