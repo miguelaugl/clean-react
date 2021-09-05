@@ -83,6 +83,7 @@ describe('Login', () => {
     mockSuccess();
     populateFields();
     cy.getByTestId('submit').dblclick();
+    cy.wait('@request');
     Helper.testHttpCallsCount(1);
   });
 

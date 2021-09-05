@@ -37,6 +37,7 @@ module.exports = merge(common, {
     contentBase: './dist',
     writeToDisk: true,
     historyApiFallback: true,
+    port: 8080,
   },
   plugins: [
     new DefinePlugin({
