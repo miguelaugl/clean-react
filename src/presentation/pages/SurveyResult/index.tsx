@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FlipMove from 'react-flip-move';
+import { useHistory } from 'react-router-dom';
 
 import { LoadSurveyResult } from '@/domain/usecases';
 import { Calendar, Error, Footer, Header, Loading } from '@/presentation/components';
@@ -30,6 +31,8 @@ export const SurveyResult = ({ loadSurveyResult }: Props) => {
       .catch(handleError);
   }, [state.reload]);
 
+  const { goBack } = useHistory();
+
   const reload = (): void => setState((old) => ({ surveyResult: null, error: '', isLoading: false, reload: !old.reload }));
 
   return (
@@ -57,7 +60,9 @@ export const SurveyResult = ({ loadSurveyResult }: Props) => {
                 </li>
               ))}
             </FlipMove>
-            <button type='button'>Voltar</button>
+            <button data-testid='back-button' type='button' onClick={goBack}>
+              Voltar
+            </button>
           </>
         )}
 
