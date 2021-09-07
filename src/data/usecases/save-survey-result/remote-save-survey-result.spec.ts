@@ -52,4 +52,13 @@ describe('RemoteSaveSurveyResult', () => {
     const promise = sut.save(mockSaveSurveyResultParams());
     await expect(promise).rejects.toThrow(new UnexpectedError());
   });
+
+  it('should throw UnexpectedError if HttpClient returns 500', async () => {
+    const { sut, httpClientSpy } = makeSut();
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
+    };
+    const promise = sut.save(mockSaveSurveyResultParams());
+    await expect(promise).rejects.toThrow(new UnexpectedError());
+  });
 });
