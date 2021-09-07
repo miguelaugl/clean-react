@@ -56,4 +56,12 @@ describe('SurveyResult', () => {
       assert.notExists(li.find('[data-testid="image"]'));
     });
   });
+
+  it('should go to surveys on back button click', () => {
+    cy.visit('/');
+    mockSuccess();
+    cy.visit('surveys/any_id');
+    cy.getByTestId('back-button').click();
+    Helper.testUrl('/');
+  });
 });
