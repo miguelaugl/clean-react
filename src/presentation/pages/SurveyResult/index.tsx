@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FlipMove from 'react-flip-move';
 
 import { LoadSurveyResult } from '@/domain/usecases';
@@ -6,11 +6,19 @@ import { Calendar, Error, Footer, Header, Loading } from '@/presentation/compone
 
 import styles from './styles.scss';
 
-export const SurveyResult = () => {
+type Props = {
+  loadSurveyResult: LoadSurveyResult;
+};
+
+export const SurveyResult = ({ loadSurveyResult }: Props) => {
   const [state] = useState({
     isLoading: false,
     error: '',
     surveyResult: null as LoadSurveyResult.Model,
+  });
+
+  useEffect(() => {
+    loadSurveyResult.load();
   });
 
   return (
