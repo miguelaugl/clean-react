@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { LoadSurveyList } from '@/domain/usecases';
 import { Footer, Header, Error } from '@/presentation/components';
 import { useErrorHandler } from '@/presentation/hooks';
-import { SurveyListContext, List } from '@/presentation/pages/SurveyList/components';
+import { List } from '@/presentation/pages/SurveyList/components';
 
 import styles from './styles.scss';
 
@@ -37,10 +37,8 @@ export const SurveyList = ({ loadSurveyList }: Props) => {
 
       <div className={styles.contentWrap}>
         <h2>Enquetes</h2>
-        <SurveyListContext.Provider value={{ state, setState }}>
-          {!!state.error && <Error error={state.error} reload={reload} />}
-          {!state.error && <List />}
-        </SurveyListContext.Provider>
+        {!!state.error && <Error error={state.error} reload={reload} />}
+        {!state.error && <List surveys={state.surveys} />}
       </div>
       <Footer />
     </div>
