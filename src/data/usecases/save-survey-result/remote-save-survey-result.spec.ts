@@ -3,6 +3,7 @@ import faker from 'faker';
 import { HttpStatusCode } from '@/data/protocols/http';
 import { HttpClientSpy, mockRemoteSurveyResultModel } from '@/data/test';
 import { RemoteSaveSurveyResult } from '@/data/usecases';
+import { AccessDeniedError } from '@/domain/errors';
 import { mockSaveSurveyResultParams } from '@/domain/test';
 
 type SutTypes = {
@@ -32,5 +33,14 @@ describe('RemoteSaveSurveyResult', () => {
     expect(httpClientSpy.url).toBe(url);
     expect(httpClientSpy.method).toBe('put');
     expect(httpClientSpy.body).toEqual(saveSurveyResultParams);
+  });
+
+  it('should throw AccessDeniedError if HttpClient returns 403', async () => {
+    const { sut, httpClientSpy } = makeSut();
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.FORBIDDEN,
+    };
+    const promise = sut.save(mockSaveSurveyResultParams());
+    await expect(promise).rejects.toThrow(new AccessDeniedError());
   });
 });
