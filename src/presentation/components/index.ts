@@ -9,3 +9,4 @@ export * from './Header';
 export * from './Icon';
 export * from './PrivateRoute';
 export * from './Loading';
+export * from './Calendar';

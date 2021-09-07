@@ -32,36 +32,6 @@
       right: 0;
     }
 
-    time {
-      background-color: $primaryLight;
-      color: $white;
-      border-radius: 8px;
-      margin-left: 24px;
-      align-self: center;
-      width: 60px;
-      height: 100px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-
-      .day {
-        font-size: 40px;
-        font-weight: 700;
-      }
-
-      .month {
-        text-transform: lowercase;
-        margin: 0 0 5px;
-      }
-
-      .year {
-        font-size: 16px;
-      }
-    }
-
     p {
       font-size: 18px;
       margin: 24px;
@@ -83,6 +53,11 @@
       background-color: $primaryDark;
     }
   }
+}
+
+.calendarWrap {
+  margin-left: 24px;
+  align-self: center;
 }
 
 @media only screen and (max-width: 600px) {
