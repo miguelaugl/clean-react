@@ -44,4 +44,13 @@ describe('RemoteLoadSurveyResult', () => {
     const promise = sut.load();
     await expect(promise).rejects.toThrow(new UnexpectedError());
   });
+
+  it('should throw UnexpectedError if HttpGetClient returns 500', async () => {
+    const { sut, httpGetClientSpy } = makeSut();
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
+    };
+    const promise = sut.load();
+    await expect(promise).rejects.toThrow(new UnexpectedError());
+  });
 });
