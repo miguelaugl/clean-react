@@ -70,7 +70,7 @@ export const SignUp = ({ validation, addAccount }: Props) => {
         return;
       }
 
-      setState({ ...state, isLoading: true });
+      setState((prevState) => ({ ...prevState, isLoading: true }));
 
       const account = await addAccount.add({
         name: state.name,
@@ -81,11 +81,11 @@ export const SignUp = ({ validation, addAccount }: Props) => {
       setCurrentAccount(account);
       history.replace('/');
     } catch (error) {
-      setState({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         isLoading: false,
         mainError: error.message,
-      });
+      }));
     }
   };
 

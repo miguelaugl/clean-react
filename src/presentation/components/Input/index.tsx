@@ -16,7 +16,7 @@ export const Input = (props: Props) => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setState({ ...state, [event.target.name]: event.target.value });
+    setState((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
   };
 
   return (
