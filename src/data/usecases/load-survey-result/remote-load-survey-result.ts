@@ -12,7 +12,6 @@ export class RemoteLoadSurveyResult implements LoadSurveyResult {
       method: 'get',
     });
     const remoteSurveyResult = httpResponse.body;
-
     switch (httpResponse.statusCode) {
       case HttpStatusCode.SUCCESS:
         return { ...remoteSurveyResult, date: new Date(remoteSurveyResult.date) };
