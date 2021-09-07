@@ -3,6 +3,7 @@ import * as Http from '../utils/http-mocks';
 
 const path = /api\/surveys/;
 export const mockUnexpectedError = (): void => Http.mockServerError(path, 'GET');
+export const mockAccessDeniedError = (): void => Http.mockForbiddenError(path, 'GET');
 export const mockSuccess = (): void => {
   cy.fixture('survey-result').then((surveyResult) => {
     Http.mockOk(path, 'GET', surveyResult);
@@ -29,5 +30,11 @@ describe('SurveyResult', () => {
     mockSuccess();
     cy.getByTestId('reload').click();
     cy.getByTestId('question').should('exist');
+  });
+
+  it('should logout on AccessDeniedError', () => {
+    mockAccessDeniedError();
+    cy.visit('');
+    Helper.testUrl('/login');
   });
 });
