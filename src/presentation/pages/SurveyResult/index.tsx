@@ -33,7 +33,9 @@ export const SurveyResult = () => {
             <span className={styles.percent}>50%</span>
           </li>
         </FlipMove>
+
         <button type='button'>Voltar</button>
+
         {false && <Loading />}
       </div>
       <Footer />
