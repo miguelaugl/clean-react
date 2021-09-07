@@ -11,7 +11,7 @@ export const SurveyResult = () => {
       <Header />
 
       <div className={styles.contentWrap}>
-        {false && (
+        {true && (
           <>
             <hgroup>
               <Calendar date={new Date()} className={styles.calendarWrap} />
