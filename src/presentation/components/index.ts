@@ -8,3 +8,4 @@ export * from './SubmitButton';
 export * from './Header';
 export * from './Icon';
 export * from './PrivateRoute';
+export * from './Loading';
