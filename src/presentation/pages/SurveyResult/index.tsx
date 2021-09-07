@@ -38,7 +38,7 @@ export const SurveyResult = ({ loadSurveyResult, saveSurveyResult }: Props) => {
       .save({
         answer,
       })
-      .then((surveyResult) => setState((prevState) => ({ ...prevState, surveyResult })))
+      .then((surveyResult) => setState((prevState) => ({ ...prevState, surveyResult, isLoading: false })))
       .catch(handleError);
   };
 
