@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { LoadSurveyList } from '@/domain/usecases';
 import { Calendar, Icon, IconName } from '@/presentation/components';
@@ -21,7 +22,11 @@ export const SurveyItem = ({ survey }: Props) => {
 
         <p data-testid='question'>{survey.question}</p>
       </div>
-      <footer>Ver resultado</footer>
+      <footer>
+        <Link data-testid='link' to={`/surveys/${survey.id}`}>
+          Ver resultado
+        </Link>
+      </footer>
     </li>
   );
 };
