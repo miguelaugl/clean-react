@@ -7,7 +7,8 @@ import { makeLogin } from '@/main/factories/pages/login/login-factory';
 import { makeSignup } from '@/main/factories/pages/signup/signup-factory';
 import { PrivateRoute } from '@/presentation/components';
 import { ApiContext } from '@/presentation/contexts';
-import { SurveyResult } from '@/presentation/pages';
+
+import { makeSurveyResult } from '../factories/pages/survey-result/survey-result-factory';
 
 export const Router = () => (
   <ApiContext.Provider
@@ -21,7 +22,7 @@ export const Router = () => (
         <Route path='/login' exact component={makeLogin} />
         <Route path='/signup' exact component={makeSignup} />
         <PrivateRoute path='/' exact component={makeSurveyList} />
-        <PrivateRoute path='/surveys' exact component={SurveyResult} />
+        <PrivateRoute path='/surveys/:id' component={makeSurveyResult} />
       </Switch>
     </BrowserRouter>
   </ApiContext.Provider>
