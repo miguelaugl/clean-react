@@ -14,7 +14,7 @@ type Props = {
 
 export const SurveyResult = ({ loadSurveyResult, saveSurveyResult }: Props) => {
   const handleError = useErrorHandler((error) => {
-    setState((prevState) => ({ ...prevState, surveyResult: null, error: error.message }));
+    setState((prevState) => ({ ...prevState, surveyResult: null, error: error.message, isLoading: false }));
   });
 
   const [state, setState] = useState({
