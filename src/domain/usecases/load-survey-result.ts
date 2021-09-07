@@ -7,12 +7,12 @@ export namespace LoadSurveyResult {
     question: string;
     answers: Answer[];
     date: Date;
-    didAnswer: boolean;
   };
 
   type Answer = {
     image?: string;
     answer: string;
     count: number;
+    percent: number;
   };
 }
