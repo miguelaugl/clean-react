@@ -20,6 +20,7 @@ export const SurveyResult = ({ loadSurveyResult }: Props) => {
     isLoading: false,
     error: '',
     surveyResult: null as LoadSurveyResult.Model,
+    reload: false,
   });
 
   useEffect(() => {
@@ -27,7 +28,9 @@ export const SurveyResult = ({ loadSurveyResult }: Props) => {
       .load()
       .then((surveyResult) => setState((prevState) => ({ ...prevState, surveyResult })))
       .catch(handleError);
-  }, []);
+  }, [state.reload]);
+
+  const reload = (): void => setState((old) => ({ surveyResult: null, error: '', isLoading: false, reload: !old.reload }));
 
   return (
     <div className={styles.surveyResultWrap}>
@@ -59,7 +62,7 @@ export const SurveyResult = ({ loadSurveyResult }: Props) => {
         )}
 
         {state.isLoading && <Loading />}
-        {!!state.error && <Error error={state.error} reload={() => {}} />}
+        {!!state.error && <Error error={state.error} reload={reload} />}
       </div>
       <Footer />
     </div>
