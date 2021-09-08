@@ -37,11 +37,13 @@ export class LoadSurveyResultSpy implements LoadSurveyResult {
 }
 
 export class SaveSurveyResultSpy implements SaveSurveyResult {
+  callsCount = 0;
   params: SaveSurveyResult.Params;
   surveyResult = mockSurveyResultModel();
 
   async save(params: SaveSurveyResult.Params): Promise<LoadSurveyResult.Model> {
     this.params = params;
+    this.callsCount += 1;
     return this.surveyResult;
   }
 }
