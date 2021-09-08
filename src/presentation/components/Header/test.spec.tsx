@@ -42,4 +42,9 @@ describe('Header Component', () => {
     makeSut(account);
     expect(screen.getByTestId('username')).toHaveTextContent(account.name);
   });
+
+  it('should not render username if account is null', () => {
+    makeSut(null);
+    expect(screen.queryByTestId('username')).not.toBeInTheDocument();
+  });
 });

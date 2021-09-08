@@ -23,7 +23,7 @@ export const Header = () => {
       <div className={styles.headerContent}>
         <Logo />
         <div className={styles.logoutWrap}>
-          <span data-testid='username'>{account?.name}</span>
+          {account && <span data-testid='username'>{account?.name}</span>}
           <a data-testid='logout' href='/' onClick={logoutClick}>
             Sair
           </a>
