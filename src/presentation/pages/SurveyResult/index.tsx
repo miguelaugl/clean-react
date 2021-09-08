@@ -33,6 +33,9 @@ export const SurveyResult = ({ loadSurveyResult, saveSurveyResult }: Props) => {
 
   const reload = (): void => setState((old) => ({ surveyResult: null, error: '', isLoading: false, reload: !old.reload }));
   const onAnswer = (answer: string) => {
+    if (state.isLoading) {
+      return;
+    }
     setState((prevState) => ({ ...prevState, isLoading: true }));
     saveSurveyResult
       .save({
