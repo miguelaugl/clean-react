@@ -1,5 +1,4 @@
 import React from 'react';
-import FlipMove from 'react-flip-move';
 import { useHistory } from 'react-router-dom';
 
 import { LoadSurveyResult } from '@/domain/usecases';
@@ -21,13 +20,11 @@ export const Result = ({ surveyResult }: Props) => {
         <h2 data-testid='question'>{surveyResult.question}</h2>
       </hgroup>
 
-      <FlipMove data-testid='answers' className={styles.answersList}>
-        <>
-          {surveyResult.answers.map((answer) => (
-            <Answer key={answer.answer} answer={answer} />
-          ))}
-        </>
-      </FlipMove>
+      <ul data-testid='answers' className={styles.answersList}>
+        {surveyResult.answers.map((answer) => (
+          <Answer key={answer.answer} answer={answer} />
+        ))}
+      </ul>
       <button data-testid='back-button' className={styles.button} type='button' onClick={goBack}>
         Voltar
       </button>
