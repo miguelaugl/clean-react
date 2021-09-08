@@ -2755,6 +2755,11 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.8.tgz#d2266a792729fb227cd216fb572f43728e1ad340"
   integrity sha512-jXKhWqXPmlUeoQnF/EhTtTl4C9SnrxSH/jZUih3jmO6lBKr99rP3/+FmrMj4EFpOXzMtXHAZkd3x0E6h6Fgflw==
 
+cypress-hmr-restarter@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/cypress-hmr-restarter/-/cypress-hmr-restarter-2.0.2.tgz#bc8aee2155d2cbf3c9dcadb77f3d751b63bc3210"
+  integrity sha512-vOX4wmLvSNzDhNKVN5rVUNwTDrtffFFelLhYbjHI+m+xNOpzs4iL9Ivh5feJcg8D05erT0ptaBqIFZCYcZHf8g==
+
 cypress@^8.3.1:
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-8.3.1.tgz#c6760dbb907df2570b0e1ac235fa31c30f9260a6"
